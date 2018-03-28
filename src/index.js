@@ -15,7 +15,7 @@ class Tile extends React.Component {
       this.openTile = this.openTile.bind(this);
     }
     toString() {
-      return this.props.bomb ? 'X' : 'O';
+      return this.props.bomb ? 'X' : this.props.number;
     }
     openTile() {
       store.dispatch(this.props.openTile({ x: this.props.x, y: this.props.y }));
@@ -30,15 +30,16 @@ class Tile extends React.Component {
 class Board extends React.Component {
   render() {
     const tiles = this.props.bricks.map((b, i ) => 
-      (<li>
+      (<div>
         {b.map((t, j) => <Tile
           bomb={t.bomb}
-          open={t.open} 
+          open={t.open}
+          number={t.number}
           x={i}
           y={j}
           openTile={this.props.openTile}
         />)}
-      </li>)
+      </div>)
     );
     return (
       <div style={{textAlign: 'center'}}>
